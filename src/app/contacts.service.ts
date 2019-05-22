@@ -51,6 +51,8 @@ export class ContactsService {
     public addContact(contact:Contact){
         if(!contact.picture)
             contact.picture = "assets/default-user.png";
+        if(!contact.id)
+            contact.id = this.contactsSubject.value.length + 1;            
         this.contactsSubject.next([...this.contactsSubject.value, contact ]);
     }
 
