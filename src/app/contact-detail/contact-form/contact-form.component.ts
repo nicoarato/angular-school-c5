@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Contact } from 'src/app/contact.model';
+import { ContactsService } from 'src/app/contacts.service';
 
 
 @Component({
@@ -11,9 +12,14 @@ export class ContactFormComponent implements OnInit {
 
   public model:Contact = new Contact(0, '');
   
-  constructor() { }
+  constructor(private contactsService:ContactsService) { }
 
   ngOnInit() {
+  }
+
+  addContact(){
+    this.contactsService.addContact(this.model);
+    this.model = new Contact(0,'');
   }
 
 }
