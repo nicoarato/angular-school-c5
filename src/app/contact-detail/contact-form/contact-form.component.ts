@@ -23,8 +23,6 @@ export class ContactFormComponent implements OnInit {
     this.model = new Contact(0,'');
   }
 
-  //...other methods ...
-
   addNewPhoneToModel(){
     this.model.phones.push({type:null, number:null});
   }
