@@ -20,10 +20,8 @@ export class ContactFormComponent implements OnInit {
 
   addContact(){
     this.contactsService.addContact(this.model);
-    this.model = new Contact(0,'');
+    this.model = new Contact(0,'', null, []);
   }
-
-  //...other methods ...
 
   addNewPhoneToModel(){
     this.model.phones.push({type:null, number:null});
