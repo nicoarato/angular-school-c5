@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Contact, PhoneType} from './contact.model';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ContactsService {
-    public readonly contacts:Contact[] = null;
+    private contactsSubject = new BehaviorSubject<Contact[]>([]);
+    public contacts$:Observable<Contact[]> = this.contactsSubject.asObservable();
 
     constructor() { 
-        this.contacts = this.loadContacts();
+        const contacts = this.loadContacts();
+        this.contactsSubject.next(contacts);
     }
 
     getContactById(id){
-        let contactMatches = this.contacts.filter(item => item.id === id);
+        let contactMatches = this.contactsSubject.value.filter(item => item.id === id);
         return contactMatches.length ? contactMatches[0] : null;
     }
 
@@ -43,6 +46,10 @@ export class ContactsService {
                 {type:PhoneType.mobile, number:939876655 },
             ], "kaycee@email.com", "Arago 356, 08032, Barcelona" ),                        
         ]
+    }
+
+    public addContact(contact:Contact){
+        this.contactsSubject.next([...this.contactsSubject.value, contact ]);
     }
 
 }
