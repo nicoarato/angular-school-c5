@@ -1,2 +1,17 @@
-<p>create contact form</p>
-<button>Add new contact</button>
+<form>
+    <div class="form-item">
+        <label for="name">Name:</label>
+        <input type="text" id="name" [(ngModel)]="model.name" name="name" required>
+    </div>
+    <div class="form-item">
+        <label for="email">Email:</label>
+        <input type="text" id="email" [(ngModel)]="model.email" name="email">
+    </div>
+    <div class="form-item">
+        <label for="address">Adress:</label>
+        <input type="text" id="address" [(ngModel)]="model.direction" name="adress" >
+    </div>
+    <button class="form-button" type="submit">Add contact</button>
+</form>
+
+<pre>{{model | json}}</pre>
