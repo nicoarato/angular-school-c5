@@ -10,7 +10,7 @@ import { ContactsService } from 'src/app/contacts.service';
 })
 export class ContactFormComponent implements OnInit {
 
-  public model:Contact = new Contact(0, '', null, []);
+  public model:Contact = new Contact(0, '', 'assets/default-user.png', []);
   public readonly phoneTypes:string[] = Object.values(PhoneType);
   
   constructor(private contactsService:ContactsService) { }
@@ -20,13 +20,20 @@ export class ContactFormComponent implements OnInit {
 
   addContact(){
     this.contactsService.addContact(this.model);
-    this.model = new Contact(0,'');
+    this.model = new Contact(0, '', 'assets/default-user.png', []);
   }
-
-  //...other methods ...
 
   addNewPhoneToModel(){
     this.model.phones.push({type:null, number:null});
+  }
+
+  addImage(event){
+    const file = event.target.files[0];
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (evt) => {
+      this.model.picture = <string>reader.result;
+    }
   }
 
 }
