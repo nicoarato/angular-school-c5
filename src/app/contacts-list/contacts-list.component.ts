@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { Contact } from '../contact.model';
 import { ContactsService } from '../contacts.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-contacts-list',
@@ -10,14 +11,14 @@ import { ContactsService } from '../contacts.service';
   styleUrls: ['./contacts-list.component.scss']
 })
 export class ContactsListComponent implements OnInit {
-  public contacts:Contact[] = [];
+  public contacts$:Observable<Contact[]>;
   constructor(
     public contactsService:ContactsService, 
     public router: Router
   ) { }
 
   ngOnInit() {
-    this.contacts = this.contactsService.contacts;
+    this.contacts$ = this.contactsService.contacts$;
   }
 
 }
