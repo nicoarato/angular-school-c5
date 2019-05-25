@@ -5,7 +5,8 @@
     </div>
     <div class="form-item">
         <label for="name">Name:</label>
-        <input type="text" id="name" [(ngModel)]="model.name" name="name" required #nameControl>
+        <input type="text" id="name" [(ngModel)]="model.name" name="name" required #nameControl="ngModel">
+        <p *ngIf="!nameControl.valid && nameControl.touched" class="error-message">This field is required!!</p>
     </div>
     <div class="form-group">
         <p>Phones:</p>
@@ -28,5 +29,3 @@
     </div>
     <button class="form-button" type="submit">Add contact</button>
 </form>
-
-<p>{{nameControl.className}}</p>
