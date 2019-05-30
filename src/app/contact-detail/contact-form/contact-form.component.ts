@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Contact, PhoneType } from 'src/app/contact.model';
 import { ContactsService } from 'src/app/contacts.service';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -12,6 +13,7 @@ export class ContactFormComponent implements OnInit {
 
   public model:Contact = new Contact(0, '', 'assets/default-user.png', []);
   public readonly phoneTypes:string[] = Object.values(PhoneType);
+  @ViewChild('contactForm', {static:true}) contactForm:NgForm;
   
   constructor(private contactsService:ContactsService) { }
 
@@ -21,6 +23,7 @@ export class ContactFormComponent implements OnInit {
   addContact(){
     this.contactsService.addContact(this.model);
     this.model = new Contact(0, '', 'assets/default-user.png', []);
+    this.contactForm.reset();
   }
 
   addNewPhoneToModel(){
