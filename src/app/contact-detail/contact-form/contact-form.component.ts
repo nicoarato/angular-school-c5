@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Contact, PhoneType } from 'src/app/contact.model';
 import { ContactsService } from 'src/app/contacts.service';
-import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -11,9 +10,7 @@ import { NgForm } from '@angular/forms';
 })
 export class ContactFormComponent implements OnInit {
 
-  public model:Contact = new Contact(0, '', 'assets/default-user.png', []);
   public readonly phoneTypes:string[] = Object.values(PhoneType);
-  @ViewChild('contactForm', {static:true}) contactForm:NgForm;
   
   constructor(private contactsService:ContactsService) { }
 
@@ -21,13 +18,9 @@ export class ContactFormComponent implements OnInit {
   }
 
   addContact(){
-    this.contactsService.addContact(this.model);
-    this.model = new Contact(0, '', 'assets/default-user.png', []);
-    this.contactForm.reset();
   }
 
   addNewPhoneToModel(){
-    this.model.phones.push({type:null, number:null});
   }
 
   addImage(event){
@@ -35,7 +28,7 @@ export class ContactFormComponent implements OnInit {
     var reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = (evt) => {
-      this.model.picture = <string>reader.result;
+      //save reader.result in form picture field
     }
   }
 

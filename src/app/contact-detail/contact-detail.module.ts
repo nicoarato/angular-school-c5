@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router'; 
 import { ContactDetailComponent } from './contact-detail.component';
 import { ContactDetailShellComponent } from './contact-detail-shell/contact-detail-shell.component';
@@ -24,7 +23,6 @@ const contactDetailRoutes:Routes = [
 @NgModule({
     imports: [
         CommonModule,
-        FormsModule,
         RouterModule.forChild(contactDetailRoutes)
     ],
     declarations:[
