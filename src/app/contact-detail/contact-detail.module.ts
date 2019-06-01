@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router'; 
+import { ReactiveFormsModule } from '@angular/forms';
 import { ContactDetailComponent } from './contact-detail.component';
 import { ContactDetailShellComponent } from './contact-detail-shell/contact-detail-shell.component';
 import { ContactDetailResolverService } from './contact-detail-resolver.service';
@@ -23,7 +24,8 @@ const contactDetailRoutes:Routes = [
 @NgModule({
     imports: [
         CommonModule,
-        RouterModule.forChild(contactDetailRoutes)
+        RouterModule.forChild(contactDetailRoutes),
+        ReactiveFormsModule
     ],
     declarations:[
         ContactDetailComponent,
