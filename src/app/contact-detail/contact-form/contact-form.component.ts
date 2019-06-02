@@ -13,6 +13,10 @@ export class ContactFormComponent implements OnInit {
   public readonly phoneTypes:string[] = Object.values(PhoneType);
   public contactForm:FormGroup = new FormGroup({
     name: new FormControl(''),
+    phone: new FormGroup({
+      type: new FormControl(null),
+      number: new FormControl('')
+    }),
     email: new FormControl(''),
     address: new FormControl('')
   });
