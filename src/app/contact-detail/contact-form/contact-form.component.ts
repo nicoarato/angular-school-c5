@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Contact, PhoneType } from 'src/app/contact.model';
 import { ContactsService } from 'src/app/contacts.service';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -11,12 +11,15 @@ import { FormControl } from '@angular/forms';
 })
 export class ContactFormComponent implements OnInit {
   public readonly phoneTypes:string[] = Object.values(PhoneType);
-  public name:FormControl = new FormControl('');
+  public contactForm:FormGroup = new FormGroup({
+    name: new FormControl(''),
+    email: new FormControl(''),
+    address: new FormControl('')
+  });
 
   constructor(private contactsService:ContactsService) { }
 
   ngOnInit() {
-    this.name.setValue('Peter');
   }
 
   addContact(){
