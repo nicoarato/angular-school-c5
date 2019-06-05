@@ -3,6 +3,8 @@ import { Contact, PhoneType } from 'src/app/contact.model';
 import { ContactsService } from 'src/app/contacts.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { startsWithCapitalValidator } from 'src/app/directives/startsWithCapital.directive';
+import { tap, filter, map } from 'rxjs/operators';
+import { zip } from 'rxjs';
 
 
 @Component({
@@ -26,6 +28,18 @@ export class ContactFormComponent implements OnInit {
   constructor(private contactsService:ContactsService) { }
 
   ngOnInit() {
+    const contact = localStorage.getItem('contact');
+    if(contact){
+      this.contactForm.setValue(JSON.parse(contact));
+    }
+    
+    zip(this.contactForm.statusChanges, this.contactForm.valueChanges).pipe(
+      filter( ([state, value]) => state == 'VALID' ),
+      map(([state, value]) => value),
+      tap(data => console.log(data)),
+    ).subscribe(formValue => {
+      localStorage.setItem('contact', JSON.stringify(formValue));
+    });
   }
 
   addContact(){
