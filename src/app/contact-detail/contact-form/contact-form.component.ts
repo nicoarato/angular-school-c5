@@ -13,6 +13,7 @@ export class ContactFormComponent implements OnInit {
   public readonly phoneTypes:string[] = Object.values(PhoneType);
   public contactForm:FormGroup = new FormGroup({
     name: new FormControl(''),
+    picture: new FormControl('assets/default-user.png'),
     phone: new FormGroup({
       type: new FormControl(null),
       number: new FormControl('')
@@ -37,7 +38,9 @@ export class ContactFormComponent implements OnInit {
     var reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = (evt) => {
-      //save reader.result in form picture field
+      this.contactForm.patchValue({
+        picture:reader.result
+      });
     }
   }
 
