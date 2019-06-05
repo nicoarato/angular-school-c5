@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Contact, PhoneType } from 'src/app/contact.model';
 import { ContactsService } from 'src/app/contacts.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { startsWithCapitalValidator } from 'src/app/directives/startsWithCapital.directive';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class ContactFormComponent implements OnInit {
   public readonly phoneTypes:string[] = Object.values(PhoneType);
   public contactForm:FormGroup = new FormGroup({
-    name: new FormControl(''),
+    name: new FormControl('', [ Validators.required, Validators.minLength(2), startsWithCapitalValidator() ]),
     picture: new FormControl('assets/default-user.png'),
     phone: new FormGroup({
       type: new FormControl(null),
@@ -42,6 +43,10 @@ export class ContactFormComponent implements OnInit {
         picture:reader.result
       });
     }
+  }
+
+  get name(){
+    return this.contactForm.get('name');
   }
 
 }
