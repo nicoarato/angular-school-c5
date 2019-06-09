@@ -26,7 +26,7 @@ export class ContactFormComponent implements OnInit {
       })
     ]),
     email: new FormControl(''),
-    address: new FormControl('')
+    direction: new FormControl('')
   });
 
   constructor(private contactsService:ContactsService) { }
@@ -52,6 +52,13 @@ export class ContactFormComponent implements OnInit {
   }
 
   addContact(){
+    this.contactsService.addContact(this.contactForm.value);
+    this.phones.clear();
+    this.addNewPhoneToModel();
+    this.contactForm.reset({
+      picture:'assets/default-user.png',
+    });
+    localStorage.removeItem('contact');
   }
 
   addNewPhoneToModel(){
