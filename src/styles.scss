@@ -1,38 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
-@mixin button-base{
+
+@mixin button-base {
     padding: 8px 24px;
-    border: 1px solid black; 
+    border: 1px solid black;
     font-size: 12px;
     font-family: initial;
-
-    &:hover{
+    &:hover {
         background-color: #EEE;
         transition: 0.1s;
-    }      
-    &:active{
+    }
+    &:active {
         background-color: #CCC;
         transition: 0.1s;
-    }    
-    &:focus{
+    }
+    &:focus {
         outline: none;
     }
-    &[disabled]{
-        border-color:#7f7f7f;
+    &[disabled] {
+        border-color: #7f7f7f;
         background-color: #f0f0f0 !important;
     }
 }
+
 a.button {
     text-decoration: none;
     color: initial;
-    @include button-base; 
-}
-
-button{
     @include button-base;
 }
 
+button {
+    @include button-base;
+}
 
-app-header{
+app-header {
     a {
         padding-left: 10px;
         padding-right: 10px;
@@ -40,14 +40,12 @@ app-header{
         padding-right: 10px;
         text-decoration: none;
         color: gray;
-
-        &:hover{
+        &:hover {
             color: gray;
             border-bottom: 4px solid gray;
             margin-bottom: -4px;
         }
-
-        &.active-link{
+        &.active-link {
             color: black;
             border-bottom: 4px solid black;
             margin-bottom: -4px;
@@ -55,10 +53,20 @@ app-header{
     }
 }
 
-.error-message{
-    color:#E13526;
+.error-message {
+    color: #E13526;
     position: absolute;
     padding-top: 8px;
     font-size: 0.9em;
     right: 0;
+}
+
+.ng-invalid:not(form).ng-touched {
+    background-color: red;
+}
+
+.ng-valid:not(form)[required] {
+    background: url("assets/check.png");
+    background-position: right;
+    background-repeat: no-repeat;
 }
