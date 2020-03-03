@@ -28,14 +28,14 @@
     
                 </option>
             </select>
-            <input type="tel" id="phone-number" [(ngModel)]="model.phones[i].number" name="phone-{{i}}-number">
+            <input type="tel" id="phone-number" [(ngModel)]="model.phones[i].number" name="phone-{{i}}-number" pattern="[+][0-9]{2,3}[-][0-9]{7,11}" placeholder="+xxx-xxxxxxxxxx">
         </div>
         <p class="form-action" (click)="addNewPhoneToModel()"> Add phone+ </p>
     </div>
 
     <div class="form-item">
         <label for="email">Email:</label>
-        <input type="text" id="email" name="email" [(ngModel)]="model.email">
+        <input type="text" id="email" name="email" [(ngModel)]="model.email" email>
     </div>
     <div class="form-item">
         <label for="address">address:</label>
