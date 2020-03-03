@@ -7,7 +7,15 @@
 
     <div class="form-item">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" [(ngModel)]="model.name" required #nameControl>
+        <input type="text" id="name" name="name" [(ngModel)]="model.name" required #nameControl="ngModel" minlength=2>
+        <ng-container *ngIf="!nameControl.valid && nameControl.touched">
+            <p class="error-message" *ngIf="nameControl.errors.required">
+                This field is required!
+            </p>
+            <p class="error-message" *ngIf="nameControl.errors.minlength">
+                A name at least 2 characters!
+            </p>
+        </ng-container>
     </div>
 
     <div class="form-group">
@@ -38,5 +46,3 @@
 
     <button class="form-button" type="submit"> Add contact</button>
 </form>
-
-<p>{{ nameControl.className }}</p>
